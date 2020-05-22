@@ -63,57 +63,42 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public PagedResult<ProductDTO> searchByName(String name, int page, int size, String order) {
+    public List<ProductDTO> searchByName(String name) {
         if (StringUtils.isEmpty(name))
             name = Constants.BLANK;
-        if (StringUtils.isEmpty(order))
-            order = Constants.ASC_SORT;
-        Sort sortable = Sort.by(Sort.Direction.fromString(order), "name");
-        Pageable pageable = PageRequest.of(page, size, sortable);
-        Page<Product> pageResult = productRepository.findByNameContaining(name, pageable);
-        return new PagedResult<>(
-                productConverter.convertEntitiesToDTOs(pageResult.getContent()), pageResult.getTotalPages(),
-                pageResult.getTotalElements(), page, size);
+
+        List<Product> list = productRepository.findByNameContaining(name);
+        return productConverter.convertEntitiesToDTOs(list);
+//        return new PagedResult<>(
+//                productConverter.convertEntitiesToDTOs(list), page,
+//                list.size(), page, size);
     }
 
     @Override
-    public PagedResult<ProductDTO> searchByColor(String color, int page, int size, String order) {
+    public List<ProductDTO> searchByColor(String color) {
         if (StringUtils.isEmpty(color))
             color = Constants.BLANK;
-        if (StringUtils.isEmpty(order))
-            order = Constants.ASC_SORT;
-        Sort sortable = Sort.by(Sort.Direction.fromString(order), "name");
-        Pageable pageable = PageRequest.of(page, size, sortable);
-        Page<Product> pageResult = productRepository.findByColorContaining(color, pageable);
-        return new PagedResult<>(
-                productConverter.convertEntitiesToDTOs(pageResult.getContent()), pageResult.getTotalPages(),
-                pageResult.getTotalElements(), page, size);
+
+//        Sort sortable = Sort.by(Sort.Direction.fromString(order), "name");
+//        Pageable pageable = PageRequest.of(page, size, sortable);
+        List<Product> pageResult = productRepository.findByColorContaining(color);
+        return productConverter.convertEntitiesToDTOs(pageResult);
     }
 
     @Override
-    public PagedResult<ProductDTO> searchByBranch(Long branchId, int page, int size, String order) {
-        Optional<Branch> currBranch = branchRepository.findById(branchId);
+    public List<ProductDTO> searchByBranch(Long branchId) {
+        Branch currBranch = branchRepository.getOne(branchId);
 
-        if (StringUtils.isEmpty(order))
-            order = Constants.ASC_SORT;
-        Sort sortable = Sort.by(Sort.Direction.fromString(order), "name");
-        Pageable pageable = PageRequest.of(page, size, sortable);
-        Page<Product> pageResult = productRepository.findByBranchContaining(currBranch.get(), pageable);
-        return new PagedResult<>(
-                productConverter.convertEntitiesToDTOs(pageResult.getContent()), pageResult.getTotalPages(),
-                pageResult.getTotalElements(), page, size);
+
+        List<Product> pageResult = productRepository.findByBranch(currBranch);
+        return productConverter.convertEntitiesToDTOs(pageResult);
     }
 
     @Override
-    public PagedResult<ProductDTO> filterByPrice(int fromPrice, int toPrice, int page, int size, String order) {
-        if (StringUtils.isEmpty(order))
-            order = Constants.ASC_SORT;
-        Sort sortable = Sort.by(Sort.Direction.fromString(order), "name");
-        Pageable pageable = PageRequest.of(page, size, sortable);
-        Page<Product> pageResult = productRepository.findByPriceGreaterThanAndPriceIsLessThan(fromPrice, toPrice, pageable);
-        return new PagedResult<>(
-                productConverter.convertEntitiesToDTOs(pageResult.getContent()), pageResult.getTotalPages(),
-                pageResult.getTotalElements(), page, size);
+    public List<ProductDTO> filterByPrice(int fromPrice, int toPrice) {
+
+        List<Product> pageResult = productRepository.findByPriceGreaterThanAndPriceIsLessThan(fromPrice, toPrice);
+        return productConverter.convertEntitiesToDTOs(pageResult);
     }
 
 

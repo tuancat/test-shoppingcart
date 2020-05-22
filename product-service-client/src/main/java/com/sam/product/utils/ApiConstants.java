@@ -29,6 +29,7 @@ public class ApiConstants {
     public static final String PRODUCT_BY_ID_END_POINT = PRODUCT_END_POINT + "/{id}";
     public static final String PRODUCT_BY_NAME_END_POINT = PRODUCT_END_POINT + "/{name}";
     public static final String PRODUCT_BY_COLOR_END_POINT = PRODUCT_END_POINT + "/color";
+    public static final String PRODUCT_BY_BRANCH_END_POINT = PRODUCT_END_POINT + "/branch";
     public static final String PRODUCT_FILTER_BY_PRICE_END_POINT = PRODUCT_END_POINT + "/filter/price";
 
 

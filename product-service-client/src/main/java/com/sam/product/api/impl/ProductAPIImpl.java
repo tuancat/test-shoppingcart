@@ -37,17 +37,22 @@ public class ProductAPIImpl implements ProductAPI {
 
     @Override
     public ResponseModel findByName(FilterObject filterObject) {
-        return new ResponseModel(productService.searchByName(filterObject.getName(), Constants.DEFAULT_PAGE_LOAD, Constants.DEFAULT_SIZE, Constants.ASC_SORT) );
+        return new ResponseModel(productService.searchByName(filterObject.getName()));
     }
 
     @Override
     public ResponseModel findByColor(FilterObject filterObject) {
-        return new ResponseModel(productService.searchByColor(filterObject.getColor(), Constants.DEFAULT_PAGE_LOAD, Constants.DEFAULT_SIZE, Constants.ASC_SORT) );
+        return new ResponseModel(productService.searchByColor(filterObject.getColor()));
+    }
+
+    @Override
+    public ResponseModel findByBrandId(FilterObject filterObject) {
+        return new ResponseModel(productService.searchByBranch(filterObject.getBranchId()));
     }
 
     @Override
     public ResponseModel findByPrice(FilterRangePrice filterRangePrice) {
-        return null;
+        return new ResponseModel(productService.filterByPrice(filterRangePrice.getFromPrice(), filterRangePrice.getToPrice()));
     }
 
 

@@ -36,6 +36,10 @@ public interface ProductAPI {
     @PostMapping(path = ApiConstants.PRODUCT_BY_COLOR_END_POINT)
     ResponseModel findByColor(@RequestBody FilterObject filterObject);
 
+    @ApiOperation(value = "Search product by branch Id", response = ResponseModel.class)
+    @PostMapping(path = ApiConstants.PRODUCT_BY_BRANCH_END_POINT)
+    ResponseModel findByBrandId(@RequestBody FilterObject filterObject);
+
     @ApiOperation(value = "Filter product by Price", response = ResponseModel.class)
     @PostMapping(path = ApiConstants.PRODUCT_FILTER_BY_PRICE_END_POINT)
     ResponseModel findByPrice(@RequestBody FilterRangePrice filterRangePrice);

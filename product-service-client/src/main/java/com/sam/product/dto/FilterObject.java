@@ -11,8 +11,6 @@ public class FilterObject implements Serializable {
 
     private String name;
     private String color;
-    private int fromPrice;
-    private int toPrice;
-    private int branch;
+    private Long branchId;
 
 }

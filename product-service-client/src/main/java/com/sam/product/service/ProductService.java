@@ -24,10 +24,10 @@ public interface ProductService {
 
     public List listProductByCategoryId(Long categoryId);
 
-    public PagedResult<ProductDTO> searchByName(String name, int page, int size, String order);
-    public PagedResult<ProductDTO> searchByColor(String color, int page, int size, String order);
+    public List<ProductDTO> searchByName(String name);
+    public List<ProductDTO> searchByColor(String color);
 
-    public PagedResult<ProductDTO> searchByBranch(Long branchId, int page, int size, String order);
+    public List<ProductDTO> searchByBranch(Long branchId);
 
-    public PagedResult<ProductDTO> filterByPrice(int fromPrice, int toPrice, int page, int size, String order);
+    public List<ProductDTO> filterByPrice(int fromPrice, int toPrice);
 }
