@@ -1,28 +1,18 @@
-package com.sam.product.entity;
+package com.sam.product.dto;
 
+import com.sam.product.entity.Product;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 
-@Entity
-@Table(name = "categories")
-public class Categories implements Serializable {
-
-    private static final long serialVersionUID = -4275434439199301275L;
-    @Id
-    @GeneratedValue
+public class CategoriesDTO {
     private Long id;
-    @Column(name = "name", length = 255, nullable = false)
     private String name;
-
-    @OneToMany(mappedBy = "categories", cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<Product> listProduct;
 
-    public Categories() {
+    public CategoriesDTO(Long id, String name, List<Product> listProduct) {
+        this.id = id;
+        this.name = name;
+        this.listProduct = listProduct;
     }
 
     public Long getId() {

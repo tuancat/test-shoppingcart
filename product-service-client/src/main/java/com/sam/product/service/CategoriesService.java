@@ -1,17 +1,20 @@
 package com.sam.product.service;
 
+import com.sam.product.dto.CategoriesDTO;
 import com.sam.product.entity.Categories;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+
 public interface CategoriesService {
-    public Categories saveOrUpdate(Categories ca);
+    CategoriesDTO add(CategoriesDTO dto);
 
-    public List findAll();
+    CategoriesDTO findById(long id);
 
-    public void delete(Long id);
+    boolean delete(long id);
 
-    public Categories findById(Long id);
+    CategoriesDTO update(long id, CategoriesDTO dto);
+
+    List<CategoriesDTO> findAll();
 }
